@@ -9,3 +9,6 @@ fun ViewGroup.inflate(layoutRes: Int): View = LayoutInflater.from(context).infla
     this,
     false
 )
+fun ViewGroup.visible() { this.visibility = View.VISIBLE }
+
+fun ViewGroup.invisible() { this.visibility = View.GONE }

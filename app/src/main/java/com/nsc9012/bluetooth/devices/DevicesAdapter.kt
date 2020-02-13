@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.adapter_discovered_devices.view.*
 class DevicesAdapter : RecyclerView.Adapter<DevicesAdapter.ViewHolder>() {
 
     private val devices = ArrayList<BluetoothDevice>()
-
+    var onItemClick: ((BluetoothDevice) -> Unit)? = null
     override fun onCreateViewHolder(container: ViewGroup, viewType: Int) = ViewHolder(
         container.inflate(R.layout.adapter_discovered_devices)
     )
@@ -35,7 +35,15 @@ class DevicesAdapter : RecyclerView.Adapter<DevicesAdapter.ViewHolder>() {
     inner class ViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
 
         fun bind(device: BluetoothDevice) {
-            view.text_view_device_name.text = device.name ?: device.address
+            view.tvName.text = device.name ?: device.address
+        }
+
+        init {
+
+            view.tvPlay.setOnClickListener {
+                onItemClick?.invoke(devices[adapterPosition])
+            }
+
         }
 
     }
